@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import LogoImg from "../assets/Images/Logo.jpg"; 
-import Signup from '../Componenets/User/Signup'
+import LogoImg from "../assets/Images/Logo.jpg";
+import Signup from "../Componenets/User/Signup";
 import { Link } from "react-router-dom";
 
 import {
@@ -91,8 +91,14 @@ export default function Navbar() {
     <nav className=" bg-gradient-to-r from-gray-800 to-gray-900 text-white shadow-lg sticky top-0 z-40">
       <div className="container mx-auto flex items-center justify-between p-4">
         <div className="flex items-center">
-          <img src={LogoImg} alt="Logo" className="h-10 w-10 rounded-full mr-3" />
-          <span className="font-bold text-xl tracking-wider  text-white">Inolck</span>
+          <img
+            src={LogoImg}
+            alt="Logo"
+            className="h-10 w-10 rounded-full mr-3"
+          />
+          <span className="font-bold text-xl tracking-wider  text-white">
+            Inolck
+          </span>
         </div>
         <ul className="hidden lg:flex items-center space-x-2">
           {NavbarItems.map((item) => (
@@ -132,12 +138,18 @@ export default function Navbar() {
                           }`}
                         >
                           <div className="flex items-center">
-                            {subitem.icon && <span className="mr-2 text-lg">{subitem.icon}</span>}
+                            {subitem.icon && (
+                              <span className="mr-2 text-lg">
+                                {subitem.icon}
+                              </span>
+                            )}
                             {subitem.name}
                           </div>
                           <FiArrowRight
                             className={`transition-opacity duration-200 ${
-                              activeSubMenu === subitem.id ? "opacity-100" : "opacity-0"
+                              activeSubMenu === subitem.id
+                                ? "opacity-100"
+                                : "opacity-0"
                             }`}
                           />
                         </button>
@@ -148,9 +160,13 @@ export default function Navbar() {
                       {item.submenu.map((subitem) => (
                         <div
                           key={subitem.id}
-                          className={`${activeSubMenu === subitem.id ? "block" : "hidden"}`}
+                          className={`${
+                            activeSubMenu === subitem.id ? "block" : "hidden"
+                          }`}
                         >
-                          <h3 className="font-bold text-lg mb-4">{subitem.name} Demos</h3>
+                          <h3 className="font-bold text-lg mb-4">
+                            {subitem.name} Demos
+                          </h3>
                           <div className="grid grid-cols-2 gap-4">
                             {subitem.demo?.map((demoItem) => (
                               <a
@@ -172,15 +188,16 @@ export default function Navbar() {
           ))}
         </ul>
         <div className="hidden lg:flex items-center space-x-4">
-          <button 
-          onClick={() => setIsSignupOpen(!isSignupOpen)}
-          className="font-medium px-4 py-2 rounded-md hover:bg-blue-200/60 transition-colors">
+          <button
+            onClick={() => setIsSignupOpen(!isSignupOpen)}
+            className="font-medium px-4 py-2 rounded-md hover:bg-blue-200/60 transition-colors"
+          >
             Login
           </button>
-          <button 
-          onClick={() => setIsSignupOpen(!isSignupOpen)}
-
-          className="font-medium px-4 py-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white transition-colors">
+          <button
+            onClick={() => setIsSignupOpen(!isSignupOpen)}
+            className="font-medium px-4 py-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white transition-colors"
+          >
             Sign Up
           </button>
         </div>
@@ -195,11 +212,7 @@ export default function Navbar() {
           </button>
         </div>
       </div>
-      {
-        isSignupOpen && (
-          <Signup/>
-        )
-      }
+      {isSignupOpen && <Signup />}
 
       {/* Mobile Sidebar */}
       <div
@@ -216,7 +229,7 @@ export default function Navbar() {
 
         {/* Sidebar Content */}
         <div
-          className={`relative bg-white w-58 max-w-[calc(100%-3rem)] h-full shadow-xl transition-transform duration-300 ease-in-out ${
+          className={`relative bg-white w-58 max-w-[calc(100%-3rem)] h-full overflow-x-scroll shadow-xl transition-transform duration-300 ease-in-out ${
             isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
           }`}
         >
@@ -238,7 +251,9 @@ export default function Navbar() {
                     <details className="group">
                       <summary className="flex items-center justify-between p-2 rounded-md hover:bg-gray-100 cursor-pointer list-none">
                         <div className="flex items-center">
-                          {item.icon && <span className="mr-2">{item.icon}</span>}
+                          {item.icon && (
+                            <span className="mr-2">{item.icon}</span>
+                          )}
                           <span className="font-medium">{item.name}</span>
                         </div>
                         <FiChevronDown className="ml-1 transition-transform duration-300 group-open:rotate-180" />
@@ -246,16 +261,36 @@ export default function Navbar() {
                       <ul className="pl-6 pt-2 space-y-1">
                         {item.submenu.map((subitem) => (
                           <li key={subitem.id}>
-                            <a href={subitem.link} className="flex items-center p-2 rounded-md hover:bg-gray-100 text-sm">
-                              {subitem.icon && <span className="mr-2">{subitem.icon}</span>}
+                            <a
+                              href={subitem.link}
+                              className="flex items-center p-2 rounded-md hover:bg-gray-100 text-sm"
+                            >
+                              {subitem.icon && (
+                                <span className="mr-2">{subitem.icon}</span>
+                              )}
                               {subitem.name}
                             </a>
+                            <ul className="pl-4 space-y-1">
+                              {subitem.demo?.map((demoItem) => (
+                                <li key={demoItem.id}>
+                                  <a
+                                    href={demoItem.link}
+                                    className="block p-2 rounded-md hover:bg-gray-100 text-xs"
+                                  >
+                                    {demoItem.name}
+                                  </a>
+                                </li>
+                              ))}
+                            </ul>
                           </li>
                         ))}
                       </ul>
                     </details>
                   ) : (
-                    <a href={item.link} className="flex items-center p-2 rounded-md hover:bg-gray-100">
+                    <a
+                      href={item.link}
+                      className="flex items-center p-2 rounded-md hover:bg-gray-100"
+                    >
                       {item.icon && <span className="mr-2">{item.icon}</span>}
                       <span className="font-medium">{item.name}</span>
                     </a>
@@ -263,8 +298,20 @@ export default function Navbar() {
                 </li>
               ))}
               <li className="border-t border-gray-200 mt-4 pt-4 flex flex-col space-y-3">
-                <button className="w-full font-medium px-4 py-2 rounded-md border border-gray-300 hover:bg-gray-100 transition-colors">Login</button>
-                <button className="w-full font-medium px-4 py-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white transition-colors">Sign Up</button>
+                <button 
+                onClick={() => {setIsSignupOpen(!isSignupOpen)
+                setMobileMenuOpen(false)
+                }}
+                className="w-full font-medium px-4 py-2 rounded-md border border-gray-300 hover:bg-gray-100 transition-colors">
+                  Login
+                </button>
+                <button 
+                onClick={() => {setIsSignupOpen(!isSignupOpen)
+                 setMobileMenuOpen(false)
+                }}
+                className="w-full font-medium px-4 py-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white transition-colors">
+                  Sign Up
+                </button>
               </li>
             </ul>
           </div>
